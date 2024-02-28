@@ -26,6 +26,10 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Simple, efficient background processing for Ruby.
+# gem 'sidekiq', '~> 6.4.0'
+gem 'sidekiq', '~> 7.2', '>= 7.2.2'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
