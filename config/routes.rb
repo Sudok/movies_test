@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :movies, only: [:index, :new, :create]
   resources :user_movies, only: [:create, :update]
 
+  post '/movies/import_csv', to: 'movies#import_csv'
+
   get '/login', to: 'sessions#new'
   delete '/logout', to: 'sessions#destroy'
 

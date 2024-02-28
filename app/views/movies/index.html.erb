@@ -1,5 +1,18 @@
 <h1>Movies</h1>
 <%= link_to "Add new", new_movie_path %>
+<br>
+<br>
+<%= form_with(url: movies_import_csv_path, local: true, multipart: true) do |form| %>
+  <div>
+    <%= form.label :file, 'Upload batch movies: ' %>
+    <%= form.file_field :file %>
+  </div>
+
+  <div>
+    <%= form.submit 'Upload CSV File' %>
+  </div>
+<% end %>
+
 <% @movies.each do |movie| %>
   <div>
     <h2><%= movie.title %></h2>

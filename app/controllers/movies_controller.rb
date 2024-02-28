@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
 
   def index
@@ -20,6 +21,13 @@ class MoviesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def import_csv
+
+    puts('============================== ENTROU')
+    # Ler .csv e criar filmes utilizando background jobs
+    uploaded_file = params[:file]
   end
 
   private
