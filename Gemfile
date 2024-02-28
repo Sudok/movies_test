@@ -27,8 +27,10 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Simple, efficient background processing for Ruby.
-# gem 'sidekiq', '~> 6.4.0'
 gem 'sidekiq', '~> 7.2', '>= 7.2.2'
+
+# The CSV library provides a complete interface to CSV files and data
+gem 'csv', '~> 3.2', '>= 3.2.8'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

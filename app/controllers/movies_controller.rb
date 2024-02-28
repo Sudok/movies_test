@@ -27,6 +27,9 @@ class MoviesController < ApplicationController
 
     puts('============================== ENTROU')
     # Ler .csv e criar filmes utilizando background jobs
+    if params[:file]
+      # TODO
+    end
     uploaded_file = params[:file]
   end
 
