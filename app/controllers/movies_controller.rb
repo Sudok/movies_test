@@ -23,14 +23,16 @@ class MoviesController < ApplicationController
     end
   end
 
+  # Ler .csv e criar filmes utilizando background jobs
   def import_csv
-
-    puts('============================== ENTROU')
-    # Ler .csv e criar filmes utilizando background jobs
-    if params[:file]
-      # TODO
-    end
     uploaded_file = params[:file]
+
+    if params[:file]
+      CSV.new(uploaded_file.read, headers: true).each do |row|
+binding.break
+
+      end
+    end
   end
 
   private
