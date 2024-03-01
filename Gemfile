@@ -35,6 +35,9 @@ gem 'csv', '~> 3.2', '>= 3.2.8'
 # Autoload dotenv in Rails.
 gem 'dotenv-rails', '~> 3.1'
 
+# BDD for Ruby
+gem 'rspec', '~> 3.4'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
