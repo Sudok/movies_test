@@ -60,6 +60,8 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 6.1'
   # BDD for Ruby
   gem 'rspec-rails', '~> 6.1.0'
+  # factory_bot is a fixtures replacement with a straightforward definition syntax
+  gem 'factory_bot_rails'
 end
 
 group :development do
