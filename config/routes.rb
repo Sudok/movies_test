@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :user_movies, only: [:create, :update]
 
   post '/movies/import_csv', to: 'movies#import_csv'
+  post 'user_movies/batch_import_score_csv', to: 'user_movies#batch_import_score_csv'
 
   get '/login', to: 'sessions#new'
   delete '/logout', to: 'sessions#destroy'

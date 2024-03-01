@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
   def import_csv
     uploaded_file = params[:file]
 
-    if params[:file]
+    if uploaded_file
       CSV.new(uploaded_file.read, headers: true).each do |row|
 
       CreateMoviesJob.perform_async(row["title"], row["director"])

@@ -13,3 +13,16 @@
 
   <%= form.submit "Create Movie" %>
 <% end %>
+
+<h1> Import batch movies </h1>
+
+<%= form_with(url: movies_import_csv_path, local: true, multipart: true) do |form| %>
+  <div>
+    <%= form.label :file, 'Upload batch movies: ' %>
+    <%= form.file_field :file %>
+  </div>
+
+  <div>
+    <%= form.submit 'Upload CSV File' %>
+  </div>
+<% end %>

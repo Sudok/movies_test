@@ -14,4 +14,35 @@ class UserMoviesController < ApplicationController
     @user_movie.update(score: params[:user_movie][:score])
     redirect_to movies_path
   end
+
+  def batch_import_score_csv
+    uploaded_file = params[:file]
+
+    if uploaded_file
+      CSV.new(uploaded_file.read, headers: true).each do |row|
+        create_average_score_job(row)
+      end
+    end
+  end
+
+  private
+
+  def create_average_score_job(row)
+    movie_id = row["movie_id"]
+    score = row["score"].to_i
+
+    if valid_score?(score)
+      CreateAverageScoreJob.perform(movie_id, score, current_user.id)
+      # CreateAverageScoreJob.perform_async(movie_id, score, current_user.id)
+    else
+      Rails.logger.warn("Invalid score for movie_id #{movie_id}: #{score}")
+    end
+  end
+
+  def valid_score?(score)
+    score >= 0 && score <= 10
+  end
 end
+
+
+# {"user_movie"=>{"movie_id"=>"3", "score"=>"2"}, "commit"=>"Rate", "id"=>"1"}
