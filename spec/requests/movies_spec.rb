@@ -45,8 +45,10 @@ RSpec.describe 'Movies', type: :request do
         sign_in user
       end
 
-      it '' do
+      it 'create movie' do
+        movie_params = attributes_for(:movie)
 
+        post movies_url
       end
     end
   end
