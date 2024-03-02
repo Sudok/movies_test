@@ -66,5 +66,5 @@ RSpec.configure do |config|
 end
 
 def sign_in(user)
-  session[:user_id] = user.id
+  post sessions_url(email: user.email, password: user.password)
 end

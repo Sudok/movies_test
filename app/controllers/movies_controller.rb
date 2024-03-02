@@ -3,7 +3,6 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-p "===============> ENTROU"
     @movies = Movie.all
     respond_to do |format|
       format.html
