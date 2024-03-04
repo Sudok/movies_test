@@ -12,6 +12,12 @@ RSpec.describe 'Sessions', type: :request do
         follow_redirect!
         assert_response :success
       end
+
+      it 'when email or password is wrong' do
+        post sessions_url params: {email: 'wrong@email.com', password: user.password}
+
+        assert_equal "Invalid email or password", flash[:alert]
+      end
     end
 
     context 'destroy session' do

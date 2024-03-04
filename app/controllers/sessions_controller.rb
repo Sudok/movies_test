@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-p '===================== ENTROU'
     session[:user_id] = nil
     redirect_to root_path
   end
