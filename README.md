@@ -1,45 +1,50 @@
-### Desafio para vaga de BackEnd - Foco em Ruby On Rails:
 
-Objetivo do Desafio:
+# Movies
 
-O objetivo deste desafio é avaliar suas habilidades no desenvolvimento com o framework Ruby On Rails, bem como quaisquer integrações necessárias, a implementação de funcionalidades que executam em segundo plano de forma síncrona, a escrita de testes e a criação de uma documentação clara.
+Desafio técnico para empresa oxeanbits, visando a criação de métodos para importação em massa de filmes e notas do mesmos!
 
-#### Requisitos:
 
-- ruby-3.1.4
-- sqlite3
+#### Requisitos
 
-Clone o projeto e ao executar:
+- [ruby-3.1.4](https://www.ruby-lang.org/en/news/2023/03/30/ruby-3-1-4-released/)
+- [sqlite3](https://www.sqlite.org/download.html)
+- [Docker 25.0.1](https://docs.docker.com/engine/release-notes/25.0/)
+- [Redis](https://redis.io/)
+
+### Executando o projeto:
 
 ```ruby
 bundle install
 rails db:migrate
 rails db:seed
+bundle install
+rails server
 ```
-Será configurado uma aplicação rails contando com as seguintes funcionalidades:
-- Usuário padrão admin@rotten e senha admin
-- Página de login
-- Rota para criação de novos usuários
-- Rota para cadastrar novo filme
-- Rota para dar nota nos filmes
-- Exibir a média das notas de cada filme
 
+### Alternativa utilizando docker:
+Foi configurado um Makefile com os alias para facilitar o setup, só rodar no terminal os comandos listados abaixo na ordem declarada.
 
-#### Desafio:
+```docker
+make setup
+make start
+```
+Depois só acessar localhost:3000 e logar utilizando a conta de usuario.
 
-- Criar uma rota para importar em massa vários filmes
-  - Você pode criar essa rota para receber um arquivo csv ou um payload json, ou outra forma que ficar mais fácil de integrar
-- Criar uma rota para submeter notas em massa para vários filmes
-  - Você pode criar essa rota para receber um arquivo csv ou um payload json, ou outra forma que ficar mais fácil de integrar
-- As tarefas acima **devem ser executadas em segundo plano**
-  - Recomendamos usar o [Sidekiq](https://github.com/sidekiq/sidekiq) para gerenciar as tarefas em segundo plano, mas você pode escolher outra solução
+### Rodando testes:
+só rodar o comando, e o mesmo já vai executar todos os testes.
+```ruby
+rspec
+```
 
-#### Pontos Extras:
-- Criar testes para as rotas da API e models da aplicação
-  - Recomendamos usar o [Rspec](https://semaphoreci.com/community/tutorials/getting-started-with-rspec) para os testes, mas você pode escolher outra solução
+### Importando filmes em lote
 
+Após logar como usario:
+email: admin@rotten
+senha: admin
 
-#### Entrega:
+Acesse a tela de criação de [filmes](http://127.0.0.1:3000/movies/new), onde voce irá encontrar o botão para upload de arquivos CSV(existem 2 exemplos na pasta fixtures: spec/fixtures).
 
-No README.md descreva as instruções sobre como executar o projeto, configurar variáveis de ambiente e executar os testes.
-Ao finalizar, forneça um link para o repositório do GitHub contendo o código-fonte e a documentação, enviado para o email vagas{at}oxeanbits{dot}com
+### Importando nota dos filmes em lote
+Importante lembrar que o passo a cima precisa ser rodado primeiro.
+
+Acesse a [tela principal](http://127.0.0.1:3000/movies/) da aplicaçao, onde os filmes estão listado, e lá voce vai encontrar o botão para import de notas, onde só recebe arquivos do tipo CSV.
