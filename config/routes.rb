@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -9,8 +11,14 @@ Rails.application.routes.draw do
   resources :movies, only: [:index, :new, :create]
   resources :user_movies, only: [:create, :update]
 
+  post '/movies/import_csv', to: 'movies#import_csv'
+  post 'user_movies/batch_import_score_csv', to: 'user_movies#batch_import_score_csv'
+
   get '/login', to: 'sessions#new'
   delete '/logout', to: 'sessions#destroy'
 
   root 'sessions#new'
+
+  # UI for sidekiq
+  mount Sidekiq::Web => '/sidekiq'
 end

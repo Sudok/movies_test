@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
 
   def index
@@ -16,7 +17,21 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to movies_path, notice: "Movie was successfully created."
+      redirect_to movies_path, notice: 'Movie was successfully created.'
+    else
+      flash[:notice] = 'Wrong params.'
+      render :new
+    end
+  end
+
+  def import_csv
+    uploaded_file = params[:file]
+
+    if uploaded_file
+      CSV.new(uploaded_file.read, headers: true).each do |row|
+        CreateMoviesJob.perform_async(row['title'], row['director'])
+      end
+      redirect_to movies_path, notice: 'Movie was successfully created.'
     else
       render :new
     end

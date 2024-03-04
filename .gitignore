@@ -34,3 +34,6 @@ tmp/*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# OSX files
+.DS_Store

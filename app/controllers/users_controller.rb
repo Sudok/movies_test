@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to movies_path
     else
+      flash[:notice] = 'Wrong params.'
       render :new
     end
   end

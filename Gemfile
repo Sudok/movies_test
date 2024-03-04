@@ -27,8 +27,13 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Simple, efficient background processing for Ruby.
-# gem 'sidekiq', '~> 6.4.0'
 gem 'sidekiq', '~> 7.2', '>= 7.2.2'
+
+# The CSV library provides a complete interface to CSV files and data
+gem 'csv', '~> 3.2', '>= 3.2.8'
+
+# Autoload dotenv in Rails.
+gem 'dotenv-rails', '~> 3.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -51,6 +56,12 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  # Shoulda Matchers provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that
+  gem 'shoulda-matchers', '~> 6.1'
+  # BDD for Ruby
+  gem 'rspec-rails', '~> 6.1.0'
+  # factory_bot is a fixtures replacement with a straightforward definition syntax
+  gem 'factory_bot_rails'
 end
 
 group :development do
