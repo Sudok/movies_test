@@ -25,7 +25,6 @@ class MoviesController < ApplicationController
   end
 
   def import_csv
-p '==================+> ENTROU'
     uploaded_file = params[:file]
 
     if uploaded_file
@@ -33,8 +32,9 @@ p '==================+> ENTROU'
         CreateMoviesJob.perform_async(row['title'], row['director'])
       end
       redirect_to movies_path, notice: 'Movie was successfully created.'
+    else
+      render :new
     end
-    render :new
   end
 
   private

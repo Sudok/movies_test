@@ -22,6 +22,7 @@ class UserMoviesController < ApplicationController
     CSV.new(uploaded_file.read, headers: true).each do |row|
       create_average_score_job(row)
     end
+    redirect_to movies_path, notice: 'Score average was successfully created.'
   end
 
   private
