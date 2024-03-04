@@ -17,8 +17,9 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to movies_path, notice: "Movie was successfully created."
+      redirect_to movies_path, notice: 'Movie was successfully created.'
     else
+      flash[:notice] = 'Wrong params.'
       render :new
     end
   end
@@ -29,7 +30,7 @@ class MoviesController < ApplicationController
     if uploaded_file
       CSV.new(uploaded_file.read, headers: true).each do |row|
 
-      CreateMoviesJob.perform_async(row["title"], row["director"])
+      CreateMoviesJob.perform_async(row['title'], row['director'])
       end
     end
   end

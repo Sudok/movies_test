@@ -48,7 +48,37 @@ RSpec.describe 'Movies', type: :request do
       it 'create movie' do
         movie_params = attributes_for(:movie)
 
-        post movies_url
+        post movies_url params: {movie: movie_params}
+
+        assert_response :redirect
+        follow_redirect!
+        assert_response :success
+      end
+    end
+
+    context 'movies with invalid params' do
+      before do
+        sign_in user
+      end
+
+      it 'try create with invalid params' do
+        movie_params = attributes_for(:movie, title: nil)
+
+        post movies_url params: {movie: movie_params}
+
+        expect(response).to have_http_status(200)
+        assert_equal "Wrong params.", flash[:notice]
+      end
+    end
+
+    context 'when user im not logged' do
+      it 'try create movies without loggin' do
+        movie_params = attributes_for(:movie)
+
+        post movies_url params: {movie: movie_params}
+
+        expect(response).to have_http_status(302)
+        assert_equal "", @response.body
       end
     end
   end
